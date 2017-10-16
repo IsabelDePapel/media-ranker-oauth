@@ -13,5 +13,8 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore app credentials
+.env
+
 # Ignore Byebug command history file.
 .byebug_history
