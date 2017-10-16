@@ -91,7 +91,7 @@ class WorksController < ApplicationController
 
 private
   def media_params
-    params.require(:work).permit(:title, :category, :creator, :description, :publication_year)
+    params.require(:work).permit(:title, :category, :creator, :description, :publication_year).merge(user_id: @login_user.id)
   end
 
   def category_from_work
@@ -99,4 +99,5 @@ private
     render_404 unless @work
     @media_category = @work.category.downcase.pluralize
   end
+
 end
