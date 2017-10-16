@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # add omniauth
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
 gem 'awesome_print'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
