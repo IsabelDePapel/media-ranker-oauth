@@ -3,6 +3,7 @@ class WorksController < ApplicationController
   # of work we're dealing with
   before_action :category_from_work, except: [:root, :index, :new, :create]
   before_action :authenticate_user, except: :root
+  before_action :authorize_user, only: [:edit, :destroy]
 
   def root
     @albums = Work.best_albums
@@ -98,6 +99,15 @@ private
     @work = Work.find_by(id: params[:id])
     render_404 unless @work
     @media_category = @work.category.downcase.pluralize
+  end
+
+  def authorize_user
+    if @login_user.id != @work.user_id
+      flash[:status] = :failure
+      flash[:result_text] = "You're not authorized to perform this action"
+
+      redirect_back fallback_location: root_path
+    end
   end
 
 end
