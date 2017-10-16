@@ -42,7 +42,16 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       flash[:success] = "#{@user.username} is logged in"
     else
-      @user = User.new uid: auth_hash['uid'], provider: auth_hash['provider'], username: auth_hash['info']['nickname'], email: auth_hash['info']['email']
+
+    provider = auth_hash['provider']
+
+      case provider
+      when "github"
+        @user = User.new uid: auth_hash['uid'], provider: auth_hash['provider'], username: auth_hash['info']['nickname'], email: auth_hash['info']['email']
+      when "google_oauth2"
+        @user = User.new uid: auth_hash['uid'], provider: auth_hash['provider'], username: auth_hash['info']['name'], email: auth_hash['info']['email']
+      end
+      # @user = User.new uid: auth_hash['uid'], provider: auth_hash['provider'], username: auth_hash['info']['nickname'], email: auth_hash['info']['email']
 
       # only reason this wouldn't work is if omni auth didn't give a provider or db was down
       if @user.save
