@@ -2,6 +2,12 @@
 
 dan:
   username: dan
+  email: dan@adadev.org
+  uid: 12345
+  provider: github
 
 kari:
   username: kari
+  email: kari@adadev.org
+  uid: 5678910234
+  provider: google_oauth2
