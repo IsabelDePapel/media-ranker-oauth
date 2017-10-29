@@ -48,6 +48,7 @@ class SessionsController < ApplicationController
       case provider
       when "github"
         @user = User.new uid: auth_hash['uid'], provider: auth_hash['provider'], username: auth_hash['info']['nickname'], email: auth_hash['info']['email']
+        
       when "google_oauth2"
         @user = User.new uid: auth_hash['uid'], provider: auth_hash['provider'], username: auth_hash['info']['name'], email: auth_hash['info']['email']
       end
